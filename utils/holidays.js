@@ -77,7 +77,7 @@ const getToday = (country) => {
     // Find all holidays being celebrated on that date in this country
     return holidays[country].filter(h => {
         if (h.month === Number(month) && h.day === Number(day)) return h.name;
-    });
+    }).map(h => h.name);
 }
 
 // Get holidays being celebrated this month by the given country's time
