@@ -98,7 +98,6 @@ const getThisMonth = (country) => {
 }
 
 const announce = async (client) => {
-    const GENERAL_ID = client.config.GENERAL_CHANNEL_ID;
     // Get local times
     console.log('----------')
     const timeAU = getDate('au');
@@ -123,7 +122,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('au', msg);
+            announceCountry(client, 'au', msg);
         }
     }
     //00:00 BR
@@ -135,7 +134,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('br', msg);
+            announceCountry(client, 'br', msg);
         }
     }
     //00:00 CA
@@ -147,7 +146,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('ca', msg);
+            announceCountry(client, 'ca', msg);
         }
     }
     //00:00 NZ
@@ -159,7 +158,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('nz', msg);
+            announceCountry(client, 'nz', msg);
         }
     }
     //00:00 GB / UTC+0
@@ -173,7 +172,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('gb', msg);
+            announceCountry(client, 'gb', msg);
         }
     }
     //00:00 US
@@ -185,12 +184,12 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry('us', msg);
+            announceCountry(client, 'us', msg);
         }
     }
 }
 
-const announceCountry = (c, msg) => {
+const announceCountry = (client, c, msg) => {
     // Make announcement in every guild
     client.guilds.cache.forEach(g => {
         // Check if announcement channel is set
