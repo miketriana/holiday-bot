@@ -10,7 +10,6 @@ module.exports = (client, message) => {
 
     // Todo:
     // Automatically refreshes and announces holidays
-    // ~help (list all commands)
     // ~time <country> (get the current time)
     // ~follow <country> (subscribe to announcments for a specific country's holidays)
     // ~unfollow <country> (unsubscribe from a country's holidays)
