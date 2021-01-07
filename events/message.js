@@ -1,10 +1,11 @@
 module.exports = (client, message) => {
     // Ignore any messages that do not start with the prefix,
     // or were sent by a bot
-    if(!message.content.startsWith(client.config.PREFIX) || message.author.bot) return;
+    const prefix = client.db.ensure(message.guild.id, '~', 'prefix');
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
 
     // Get list of args separated by spaces
-    const args = message.content.slice(client.config.PREFIX.length).trim().split(/ +/g);
+    const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
 
     // Todo:
@@ -15,7 +16,7 @@ module.exports = (client, message) => {
     // ~unfollow <country> (unsubscribe from a country's holidays)
     // ~followed (list all the countries currently follwed by the server)
     if(client.commands.has(command)) {
-        console.log(`${message.author}: ~${command} ${args}`);
+        //console.log(`${message.author}: ${command} ${args}`);
         client.commands.get(command).execute(client, message, args);
     }
 };

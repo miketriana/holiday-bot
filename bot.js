@@ -1,9 +1,19 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
+// Create bot client
 const client = new Discord.Client();
 const config = require('./utils/config');
 client.config = config;
+
+// Create database
+const Enmap = require('enmap');
+const settingsEnmap = new Enmap({
+    name: 'settings',
+    autoFetch: true,
+    fetchAll: false
+});
+client.db = settingsEnmap;
 
 // Load all events from the /events/ folder
 fs.readdir('./events/', (err, files) => {
@@ -21,6 +31,7 @@ fs.readdir('./events/', (err, files) => {
         client.on(eventName, event.bind(null, client));
         delete require.cache[require.resolve(`./events/${file}`)];
     });
+    console.log('Loaded events.');
 });
 
 client.commands = new Discord.Collection();
@@ -37,7 +48,15 @@ fs.readdir('./commands/', (err, files) => {
         // Store command in client
         client.commands.set(commandName, command);
     });
+    console.log('Loaded commands.');
 });
 
-// Activate bot
-client.login(config.DISCORD_BOT_TOKEN);
+(async function() {
+    // Wait for database to load
+    console.log('Loading enmap...');
+    await settingsEnmap.defer;
+    console.log(`Enmap ready. ${settingsEnmap.size} keys loaded.`);
+    // Activate bot
+    console.log('Logging into bot...');
+    client.login(config.DISCORD_BOT_TOKEN);
+}());

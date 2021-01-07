@@ -123,8 +123,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('au', msg);
         }
     }
     //00:00 BR
@@ -136,8 +135,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('br', msg);
         }
     }
     //00:00 CA
@@ -149,8 +147,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('ca', msg);
         }
     }
     //00:00 NZ
@@ -162,8 +159,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('nz', msg);
         }
     }
     //00:00 GB / UTC+0
@@ -177,8 +173,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('gb', msg);
         }
     }
     //00:00 US
@@ -190,10 +185,20 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            // Make the announcement in the proper channel
-            client.channels.cache.get(GENERAL_ID).send(msg);
+            announceCountry('us', msg);
         }
     }
+}
+
+const announceCountry = (c, msg) => {
+    // Make announcement in every guild
+    client.guilds.cache.forEach(g => {
+        // Check if announcement channel is set
+        if (client.db.has(g.id, 'announcementChannel')) {
+            // Make the announcement in the proper channel
+            client.channels.cache.get(client.db.get(g.id, 'announcementChannel')).send(msg);
+        }
+    })
 }
 
 module.exports = {
