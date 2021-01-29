@@ -99,19 +99,19 @@ const getThisMonth = (country) => {
 
 const announce = async (client) => {
     // Get local times
-    console.log('----------')
+    //console.log('----------')
     const timeAU = getDate('au');
-    console.log('AU time: ', timeAU.format('HH:mm'));
+    //console.log('AU time: ', timeAU.format('HH:mm'));
     const timeBR = getDate('br');
-    console.log('BR time: ', timeBR.format('HH:mm'));
+    //console.log('BR time: ', timeBR.format('HH:mm'));
     const timeCA = getDate('ca');
-    console.log('CA time: ', timeCA.format('HH:mm'));
+    //console.log('CA time: ', timeCA.format('HH:mm'));
     const timeNZ = getDate('nz');
-    console.log('NZ time: ', timeNZ.format('HH:mm'));
+    //console.log('NZ time: ', timeNZ.format('HH:mm'));
     const timeGB = getDate('gb');
-    console.log('GB time: ', timeGB.format('HH:mm'));
+    //console.log('GB time: ', timeGB.format('HH:mm'));
     const timeUS = getDate('us');
-    console.log('US time: ', timeUS.format('HH:mm'));
+    //console.log('US time: ', timeUS.format('HH:mm'));
     
     //00:00 AU
     if (timeAU.format('HH:mm') === '00:00') {
