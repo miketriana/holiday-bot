@@ -172,7 +172,7 @@ const announce = async (client) => {
             msg = msg.concat(`${h}\n`);
         })
         if (today.length > 0) {
-            announceCountry(client, 'gb', msg);
+            announceCountry(client, 'uk', msg);
         }
     }
     //00:00 US
@@ -193,7 +193,7 @@ const announceCountry = (client, c, msg) => {
     // Make announcement in every guild
     client.guilds.cache.forEach(g => {
         // Check if announcement channel is set
-        if (client.db.has(g.id, 'announcementChannel')) {
+        if (client.db.has(g.id, 'announcementChannel') && client.db.get(g.id, 'followedCountries').includes(c)) {
             // Make the announcement in the proper channel
             client.channels.cache.get(client.db.get(g.id, 'announcementChannel')).send(msg);
         }
