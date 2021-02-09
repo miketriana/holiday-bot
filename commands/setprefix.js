@@ -8,7 +8,7 @@ module.exports = {
         }
 
         // Handle missing args
-        if (!args[0]) message.reply('Please specify a character to use as the prefix.');
+        if (args.length === 0) message.reply('Please specify a character to use as the prefix.');
 
         // Change the prefix setting
         client.db.set(message.guild.id, args[0], 'prefix');
