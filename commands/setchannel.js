@@ -1,6 +1,6 @@
 module.exports = {
     name: 'setchannel',
-    description: 'sets the channel used for announcments to the current channel',
+    description: 'uses this channel for holiday announcements',
     execute: (client, message, args) => {
         // Check user permissions
         if (!message.member.permissions.has('MANAGE_CHANNELS')) {

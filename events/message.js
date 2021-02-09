@@ -10,12 +10,7 @@ module.exports = (client, message) => {
 
     // Todo:
     // Automatically refreshes and announces holidays
-    // ~time <country> (get the current time)
-    // ~follow <country> (subscribe to announcments for a specific country's holidays)
-    // ~unfollow <country> (unsubscribe from a country's holidays)
-    // ~followed (list all the countries currently follwed by the server)
     if(client.commands.has(command)) {
-        //console.log(`${message.author}: ${command} ${args}`);
         client.commands.get(command).execute(client, message, args);
     }
 };
