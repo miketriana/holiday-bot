@@ -7,6 +7,9 @@ module.exports = {
             return message.reply('You must have permission to manage channels to use this command.');
         }
 
+        // Handle missing args
+        if (!args[0]) message.reply('Please specify a character to use as the prefix.');
+
         // Change the prefix setting
         client.db.set(message.guild.id, args[0], 'prefix');
         message.reply(`Set command prefix to \`${args[0]}\`.`);
