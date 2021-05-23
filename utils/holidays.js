@@ -24,8 +24,8 @@ const fetch = async () => {
 const fetchCountry = async (c) => {
     const list = [];
     const year = getDate(c).format('YYYY');
-    const res = await axios.get(`https://calendarific.com/api/v2/holidays?&api_key=${config.HOLIDAY_API_KEY}&country=${c}&year=${year}`);
-    if(res.data.meta.code === 200) {
+    try {
+        const res = await axios.get(`https://calendarific.com/api/v2/holidays?&api_key=${config.HOLIDAY_API_KEY}&country=${c}&year=${year}`);
         res.data.response.holidays.forEach(h => {
             const holiday = {
                 name: h.name,
@@ -40,11 +40,11 @@ const fetchCountry = async (c) => {
                 list.push(holiday);
             }
         });
+    } catch (err) {
+        console.error(`Error fetching holidays for ${c}: ${err}`);
     }
-    else {
-        console.error(`Error fetching holidays for ${c}.`);
-    }
-    holidays[c] = list;
+
+    if (list.length > 0) holidays[c] = list;
 }
 
 const getDate = (country) => {
